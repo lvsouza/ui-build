@@ -1,4 +1,4 @@
-import { FC } from "../../core/types/FuctionalComponent";
+import { FC } from "../types";
 
 interface IFrameProps {
   children?: HTMLElement | HTMLElement[];
