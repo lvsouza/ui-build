@@ -2,7 +2,9 @@ interface DividerProps {
   classList?: string[];
 }
 
-export function Divider(props?: DividerProps) {
+export function Divider(): HTMLHRElement;
+export function Divider(props?: DividerProps): HTMLHRElement;
+export function Divider(props?: DividerProps): HTMLHRElement {
   const element = document.createElement('hr');
 
   const load = () => {

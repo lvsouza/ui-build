@@ -2,8 +2,23 @@ interface TextProps {
   text?: string | string[];
 }
 
-export function Text(props?: TextProps) {
+export function Text(): Text;
+export function Text(text: string): Text;
+export function Text(text: string[]): Text;
+export function Text(props: TextProps): Text;
+export function Text(props?: TextProps | string | string[]) {
   const element = document.createTextNode('');
+
+  if (typeof props === 'string' || Array.isArray(props)) {
+
+    if (Array.isArray(props)) {
+      element.textContent = props.join();
+    } else {
+      element.textContent = props;
+    }
+
+    return element;
+  }
 
   if (props?.text) {
     if (Array.isArray(props.text)) {
@@ -17,3 +32,7 @@ export function Text(props?: TextProps) {
 
   return element;
 }
+
+const teste = Text()
+
+console.log()

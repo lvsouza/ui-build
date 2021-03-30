@@ -4,6 +4,8 @@ interface TitleProps {
   classList?: string[];
 }
 
+export function Title(): HTMLHeadingElement;
+export function Title(props?: TitleProps): HTMLHeadingElement;
 export function Title(props?: TitleProps) {
   const element = document.createElement(props?.variant || 'h1');
 

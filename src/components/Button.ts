@@ -3,7 +3,9 @@ interface ButtonProps {
   classList?: string[];
 }
 
-export function Button(props?: ButtonProps) {
+export function Button(): HTMLButtonElement;
+export function Button(props?: ButtonProps): HTMLButtonElement;
+export function Button(props?: ButtonProps): HTMLButtonElement {
   const element = document.createElement('button');
 
   const load = () => {

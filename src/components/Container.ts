@@ -3,6 +3,8 @@ interface ContainerProps {
   classList?: string[];
 }
 
+export function Container(): HTMLDivElement;
+export function Container(props?: ContainerProps): HTMLDivElement;
 export function Container(props?: ContainerProps) {
   const element = document.createElement('div');
 

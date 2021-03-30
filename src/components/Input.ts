@@ -5,6 +5,8 @@ interface InputProps {
   value?: string;
 }
 
+export function Input(): HTMLInputElement;
+export function Input(props?: InputProps): HTMLInputElement;
 export function Input(props?: InputProps) {
   const element = document.createElement('input');
 

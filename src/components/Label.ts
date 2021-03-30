@@ -3,8 +3,21 @@ interface LabelProps {
   classList?: string[];
 }
 
+export function Label(): HTMLLabelElement;
+export function Label(props?: LabelProps): HTMLLabelElement;
 export function Label(props?: LabelProps) {
   const element = document.createElement('label');
+
+  if (typeof props === 'string' || Array.isArray(props)) {
+
+    if (Array.isArray(props)) {
+      element.textContent = props.join();
+    } else {
+      element.textContent = props;
+    }
+
+    return element;
+  }
 
   const load = () => {
     if (props?.children) {

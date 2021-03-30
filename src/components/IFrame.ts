@@ -6,23 +6,25 @@ interface IFrameProps {
   onLoad?: () => void;
 }
 
-export const IFrame: FC<IFrameProps, HTMLIFrameElement> = ({ children, classList, onLoad }) => {
+export function IFrame(): HTMLIFrameElement;
+export function IFrame(props?: IFrameProps): HTMLIFrameElement;
+export function IFrame(props?: IFrameProps): HTMLIFrameElement {
   const element = document.createElement('iframe');
 
   const load = () => {
-    if (children && element.contentDocument) {
-      if (Array.isArray(children)) {
-        element.contentDocument.body.append(...children);
+    if (props?.children && element.contentDocument) {
+      if (Array.isArray(props?.children)) {
+        element.contentDocument.body.append(...props?.children);
       } else {
-        element.contentDocument.body.appendChild(children);
+        element.contentDocument.body.appendChild(props?.children);
       }
 
-      if (classList) {
-        element.classList.add(...classList);
+      if (props?.classList) {
+        element.classList.add(...props?.classList);
       }
     }
 
-    onLoad && onLoad();
+    props?.onLoad && props?.onLoad();
   }
 
   element.onload = load;
