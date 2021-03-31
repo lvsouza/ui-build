@@ -25,6 +25,10 @@ export function IFrame(props?: IFrameProps): HTMLIFrameElement {
       if (props?.style) {
         Object.assign(element.style, props?.style);
       }
+
+      if (props?.id) {
+        element.id = props.id;
+      }
     }
 
     props?.onLoad && props?.onLoad();

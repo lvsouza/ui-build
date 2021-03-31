@@ -36,6 +36,10 @@ export function Input(props?: InputProps) {
     if (props?.style) {
       Object.assign(element.style, props?.style);
     }
+
+    if (props?.id) {
+      element.id = props.id;
+    }
   }
 
   load();
