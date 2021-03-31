@@ -1,6 +1,7 @@
-interface ContainerProps {
+import { NativeElement } from "../types";
+
+interface ContainerProps extends NativeElement {
   children?: Node | Node[];
-  classList?: string[];
 }
 
 export function Container(): HTMLDivElement;
@@ -19,6 +20,10 @@ export function Container(props?: ContainerProps) {
 
     if (props?.classList) {
       element.classList.add(...props.classList);
+    }
+
+    if (props?.style) {
+      Object.assign(element.style, props?.style);
     }
   }
 

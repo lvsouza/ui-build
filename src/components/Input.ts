@@ -1,7 +1,8 @@
-interface InputProps {
+import { NativeElement } from "../types";
+
+interface InputProps extends NativeElement {
   type?: 'text' | 'number' | 'date' | 'color' | 'time' | 'checkbox' | 'radio' | 'range' | string;
   children?: Node | Node[];
-  classList?: string[];
   value?: string;
 }
 
@@ -30,6 +31,10 @@ export function Input(props?: InputProps) {
 
     if (props?.classList) {
       element.classList.add(...props.classList);
+    }
+
+    if (props?.style) {
+      Object.assign(element.style, props?.style);
     }
   }
 

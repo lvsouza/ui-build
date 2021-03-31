@@ -1,7 +1,8 @@
-interface TitleProps {
+import { NativeElement } from "../types";
+
+interface TitleProps extends NativeElement {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   children?: Node | Node[];
-  classList?: string[];
 }
 
 export function Title(): HTMLHeadingElement;
@@ -20,6 +21,10 @@ export function Title(props?: TitleProps) {
 
     if (props?.classList) {
       element.classList.add(...props.classList);
+    }
+
+    if (props?.style) {
+      Object.assign(element.style, props?.style);
     }
   }
 

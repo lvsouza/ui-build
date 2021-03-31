@@ -1,8 +1,7 @@
-import { FC } from "../types";
+import { NativeElement } from "../types";
 
-interface IFrameProps {
+interface IFrameProps extends NativeElement {
   children?: HTMLElement | HTMLElement[];
-  classList?: string[];
   onLoad?: () => void;
 }
 
@@ -21,6 +20,10 @@ export function IFrame(props?: IFrameProps): HTMLIFrameElement {
 
       if (props?.classList) {
         element.classList.add(...props?.classList);
+      }
+
+      if (props?.style) {
+        Object.assign(element.style, props?.style);
       }
     }
 

@@ -1,6 +1,7 @@
-interface LabelProps {
+import { NativeElement } from "../types";
+
+interface LabelProps extends NativeElement {
   children?: Node | Node[];
-  classList?: string[];
 }
 
 export function Label(): HTMLLabelElement;
@@ -30,6 +31,10 @@ export function Label(props?: LabelProps) {
 
     if (props?.classList) {
       element.classList.add(...props.classList);
+    }
+
+    if (props?.style) {
+      Object.assign(element.style, props?.style);
     }
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "ui-build",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "",
   "license": "MIT",
   "author": "",
@@ -12,6 +12,8 @@
   "files": [
     "/dist"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "csstype": "^3.0.7"
+  },
   "devDependencies": {}
 }

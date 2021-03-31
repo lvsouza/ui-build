@@ -1,6 +1,7 @@
-interface ButtonProps {
+import { NativeElement } from "../types/NativeElement";
+
+interface ButtonProps extends NativeElement {
   children?: Node | Node[];
-  classList?: string[];
 }
 
 export function Button(): HTMLButtonElement;
@@ -19,6 +20,10 @@ export function Button(props?: ButtonProps): HTMLButtonElement {
 
     if (props?.classList) {
       element.classList.add(...props.classList);
+    }
+
+    if (props?.style) {
+      Object.assign(element.style, props?.style);
     }
   }
 
