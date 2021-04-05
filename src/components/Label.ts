@@ -1,6 +1,6 @@
 import { NativeElement } from "../types";
 
-interface LabelProps extends NativeElement {
+interface LabelProps extends NativeElement<HTMLLabelElement> {
   children?: Node | Node[];
 }
 
@@ -43,6 +43,11 @@ export function Label(props?: LabelProps) {
   }
 
   load();
+
+  // Load the element reference
+  if (props.ref) {
+    props.ref.value = element;
+  }
 
   return element;
 }

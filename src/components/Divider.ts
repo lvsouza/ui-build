@@ -1,6 +1,6 @@
 import { NativeElement } from "../types";
 
-interface DividerProps extends NativeElement { }
+interface DividerProps extends NativeElement<HTMLHRElement> { }
 
 export function Divider(): HTMLHRElement;
 export function Divider(props?: DividerProps): HTMLHRElement;
@@ -22,6 +22,11 @@ export function Divider(props?: DividerProps): HTMLHRElement {
   }
 
   load();
+
+  // Load the element reference
+  if (props.ref) {
+    props.ref.value = element;
+  }
 
   return element;
 }

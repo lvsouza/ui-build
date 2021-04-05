@@ -1,6 +1,6 @@
 import { NativeElement } from "../types/NativeElement";
 
-interface ButtonProps extends NativeElement {
+interface ButtonProps extends NativeElement<HTMLButtonElement> {
   children?: Node | Node[];
 }
 
@@ -32,6 +32,11 @@ export function Button(props?: ButtonProps): HTMLButtonElement {
   }
 
   load();
+
+  // Load the element reference
+  if (props.ref) {
+    props.ref.value = element;
+  }
 
   return element;
 }

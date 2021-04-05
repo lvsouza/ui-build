@@ -1,5 +1,8 @@
+import { MutableRefObject } from "../types";
+
 interface TextProps {
   text?: string | string[];
+  ref?: MutableRefObject<Text>;
 }
 
 export function Text(): Text;
@@ -28,6 +31,11 @@ export function Text(props?: TextProps | string | string[]) {
     }
   } else {
     element.textContent = '';
+  }
+
+  // Load the element reference
+  if (props.ref) {
+    props.ref.value = element;
   }
 
   return element;

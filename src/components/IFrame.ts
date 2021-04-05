@@ -1,6 +1,6 @@
 import { NativeElement } from "../types";
 
-interface IFrameProps extends NativeElement {
+interface IFrameProps extends NativeElement<HTMLIFrameElement> {
   children?: HTMLElement | HTMLElement[];
   onLoad?: () => void;
 }
@@ -35,6 +35,11 @@ export function IFrame(props?: IFrameProps): HTMLIFrameElement {
   }
 
   element.onload = load;
+
+  // Load the element reference
+  if (props.ref) {
+    props.ref.value = element;
+  }
 
   return element;
 }

@@ -1,6 +1,6 @@
 import { NativeElement } from "../types";
 
-interface InputProps extends NativeElement {
+interface InputProps extends NativeElement<HTMLInputElement> {
   type?: 'text' | 'number' | 'date' | 'color' | 'time' | 'checkbox' | 'radio' | 'range' | string;
   children?: Node | Node[];
   value?: string;
@@ -43,6 +43,11 @@ export function Input(props?: InputProps) {
   }
 
   load();
+
+  // Load the element reference
+  if (props.ref) {
+    props.ref.value = element;
+  }
 
   return element;
 }

@@ -1,6 +1,6 @@
 import { NativeElement } from "../types";
 
-interface ContainerProps extends NativeElement {
+interface ContainerProps extends NativeElement<HTMLDivElement> {
   children?: Node | Node[];
 }
 
@@ -32,6 +32,11 @@ export function Container(props?: ContainerProps) {
   }
 
   load();
+
+  // Load the element reference
+  if (props.ref) {
+    props.ref.value = element;
+  }
 
   return element;
 }

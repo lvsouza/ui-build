@@ -1,6 +1,6 @@
 import { NativeElement } from "../types";
 
-interface TitleProps extends NativeElement {
+interface TitleProps extends NativeElement<HTMLHeadingElement> {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   children?: Node | Node[];
 }
@@ -33,6 +33,11 @@ export function Title(props?: TitleProps) {
   }
 
   load();
+
+  // Load the element reference
+  if (props.ref) {
+    props.ref.value = element;
+  }
 
   return element;
 }
