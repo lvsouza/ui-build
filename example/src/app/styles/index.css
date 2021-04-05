@@ -1,0 +1,7 @@
+@import './global.css';
+#toolbar, #properties {
+  min-width: 250px;
+  max-width: 400px;
+  overflow-x: hidden;
+  overflow-y: overlay;
+}
