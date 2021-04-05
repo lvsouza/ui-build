@@ -45,7 +45,7 @@ export function Input(props?: InputProps) {
   load();
 
   // Load the element reference
-  if (props.ref) {
+  if (props?.ref) {
     props.ref.value = element;
   }
 

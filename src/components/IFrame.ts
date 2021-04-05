@@ -37,7 +37,7 @@ export function IFrame(props?: IFrameProps): HTMLIFrameElement {
   element.onload = load;
 
   // Load the element reference
-  if (props.ref) {
+  if (props?.ref) {
     props.ref.value = element;
   }
 

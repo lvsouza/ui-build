@@ -24,7 +24,7 @@ export function Divider(props?: DividerProps): HTMLHRElement {
   load();
 
   // Load the element reference
-  if (props.ref) {
+  if (props?.ref) {
     props.ref.value = element;
   }
 

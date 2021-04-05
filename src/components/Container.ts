@@ -34,7 +34,7 @@ export function Container(props?: ContainerProps) {
   load();
 
   // Load the element reference
-  if (props.ref) {
+  if (props?.ref) {
     props.ref.value = element;
   }
 

@@ -34,13 +34,9 @@ export function Text(props?: TextProps | string | string[]) {
   }
 
   // Load the element reference
-  if (props.ref) {
+  if (props?.ref) {
     props.ref.value = element;
   }
 
   return element;
 }
-
-const teste = Text()
-
-console.log()

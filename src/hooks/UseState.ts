@@ -1,20 +1,20 @@
-import { stateEvent } from "../events";
+import { stateEvent, stateIndex } from "../events";
 
 const states: any[] = [];
-let stateIndex = 0;
 
-export function useState<T>(initialState: T): [T, ((newState: T) => void)] {
-  stateIndex++;
+export const useState = <T>(initialState: T): [T, ((newState: T) => void)] => {
+  const localIndex = stateIndex.index;
 
-  if (!states[stateIndex]) {
-    states[stateIndex] = initialState;
+  if (!states[localIndex]) {
+    states[localIndex] = initialState;
   }
 
   const setState = (newState: T) => {
-    states[stateIndex] = newState;
-
+    states[localIndex] = newState;
     dispatchEvent(stateEvent);
   }
 
-  return [states[stateIndex], setState];
+  stateIndex.index + 1;
+
+  return [states[localIndex], setState];
 }
