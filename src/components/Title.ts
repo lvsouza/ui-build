@@ -2,6 +2,7 @@ import { NativeElement } from "../types";
 
 interface TitleProps extends NativeElement<HTMLHeadingElement> {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  onClick?: (ev: MouseEvent) => void;
   children?: Node | Node[];
 }
 
@@ -37,6 +38,11 @@ export function Title(props?: TitleProps) {
   // Load the element reference
   if (props?.ref) {
     props.ref.value = element;
+  }
+
+  // Set on click
+  if (props?.onClick) {
+    element.onclick = props.onClick;
   }
 
   return element;

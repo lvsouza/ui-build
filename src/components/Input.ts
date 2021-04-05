@@ -2,6 +2,7 @@ import { NativeElement } from "../types";
 
 interface InputProps extends NativeElement<HTMLInputElement> {
   type?: 'text' | 'number' | 'date' | 'color' | 'time' | 'checkbox' | 'radio' | 'range' | string;
+  onClick?: (ev: MouseEvent) => void;
   children?: Node | Node[];
   value?: string;
 }
@@ -47,6 +48,11 @@ export function Input(props?: InputProps) {
   // Load the element reference
   if (props?.ref) {
     props.ref.value = element;
+  }
+
+  // Set on click
+  if (props?.onClick) {
+    element.onclick = props.onClick;
   }
 
   return element;

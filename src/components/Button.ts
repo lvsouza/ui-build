@@ -2,6 +2,7 @@ import { NativeElement } from "../types/NativeElement";
 
 interface ButtonProps extends NativeElement<HTMLButtonElement> {
   children?: Node | Node[];
+  onClick?: (ev: MouseEvent) => void;
 }
 
 export function Button(): HTMLButtonElement;
@@ -36,6 +37,11 @@ export function Button(props?: ButtonProps): HTMLButtonElement {
   // Load the element reference
   if (props?.ref) {
     props.ref.value = element;
+  }
+
+  // Set on click
+  if (props?.onClick) {
+    element.onclick = props.onClick;
   }
 
   return element;

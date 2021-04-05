@@ -2,6 +2,7 @@ import { NativeElement } from "../types";
 
 interface LabelProps extends NativeElement<HTMLLabelElement> {
   children?: Node | Node[];
+  onClick?: (ev: MouseEvent) => void;
 }
 
 export function Label(): HTMLLabelElement;
@@ -47,6 +48,11 @@ export function Label(props?: LabelProps) {
   // Load the element reference
   if (props?.ref) {
     props.ref.value = element;
+  }
+
+  // Set on click
+  if (props?.onClick) {
+    element.onclick = props.onClick;
   }
 
   return element;
