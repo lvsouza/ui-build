@@ -1,25 +1,29 @@
 import { stateEvent, stateIndex } from "./events";
 
-export const Render = (target: HTMLElement, builder: () => HTMLElement | HTMLElement[]) => {
-  const elements = builder();
-
+const draw = (target: HTMLElement, elements: HTMLElement | HTMLElement[]) => {
+  console.log('Draw')
   if (Array.isArray(elements)) {
     elements.forEach(element => target.appendChild(element));
   } else {
     target.appendChild(elements);
   }
+}
 
+const clear = (target: HTMLElement) => {
+  console.log('Clear')
+  target.innerHTML = '';
+}
+
+export const Render = (target: HTMLElement, builder: () => HTMLElement | HTMLElement[]) => {
   window.addEventListener(stateEvent.type, () => {
     const elements = builder();
-    target.innerHTML = '';
 
-    if (Array.isArray(elements)) {
-      elements.forEach(element => target.appendChild(element));
-    } else {
-      target.appendChild(elements);
-    }
+    clear(target);
+    draw(target, elements);
 
     stateIndex.index = 0;
   });
 
+  const elements = builder();
+  draw(target, elements);
 }

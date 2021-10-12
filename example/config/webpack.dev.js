@@ -27,6 +27,7 @@ module.exports = {
         test: /\.js$/,
         enforce: 'pre',
         use: ['source-map-loader'],
+        include: /node_modules\/ui-build/,
       },
       {
         test: /\.(png|jpe?g|gif)$/i,

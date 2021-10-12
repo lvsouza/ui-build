@@ -7,7 +7,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "prebuild": "del-cli example/node_modules/ui-build/**/*",
+    "build": "tsc",
+    "postbuild": "cpy **/* ../example/node_modules/ui-build/ --cwd=dist/ --parents"
   },
   "files": [
     "/dist"
@@ -15,5 +17,8 @@
   "dependencies": {
     "csstype": "^3.0.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cpy-cli": "^3.1.1",
+    "del-cli": "^4.0.1"
+  }
 }
