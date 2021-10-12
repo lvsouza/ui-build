@@ -1,6 +1,5 @@
-import { Button, Container, FC, Text, Title, useRef, useState } from "ui-build";
-
-import './styles/index.css';
+import { Button, Container, FC, Text, Title, useState } from "ui-build";
+import 'supreme-ui/dist/supreme-ui.css';
 
 export const App: FC = () => {
   return Counter();
@@ -37,4 +36,4 @@ const Counter: FC = () => {
       }),
     ],
   });
-}
+};

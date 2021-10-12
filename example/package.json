@@ -4,6 +4,7 @@
     "start": "webpack serve --config ./config/webpack.dev.js"
   },
   "dependencies": {
+    "supreme-ui": "^0.0.9",
     "ui-build": "./../dist"
   },
   "devDependencies": {
