@@ -3,7 +3,7 @@ export const Render = (target: HTMLElement, builder: () => HTMLElement | HTMLEle
   const elements = builder();
 
   if (Array.isArray(elements)) {
-    elements.forEach(element => target.appendChild(element));
+    target.append(...elements);
   } else {
     target.appendChild(elements);
   }

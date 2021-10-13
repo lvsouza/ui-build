@@ -17,8 +17,23 @@ export interface IObservable<T> {
    */
   set: (val: T) => void;
   /**
+   * Execute on ini and on every change of the value
+   * @param callback Function performed when there is a change in the observable value or on start
+   */
+  on(callback: (val: T) => void): ISubscription;
+  /**
+   * Execute once on 
+   * @param callback Function performed when there is a change in the observable value
+   */
+  onInit(callback: (val: T) => void): void;
+  /**
+   * Execute on every change of the value
+   * @param callback Function performed when there is a change in the observable value
+   */
+  onChange(callback: (val: T) => void): ISubscription;
+  /**
    * Enables enrollment in value changes
    * @param callback Function performed when there is a change in the observable value
    */
-  subscribe(callback: (val: T) => void): ISubscription
+  subscribe(callback: (val: T) => void): ISubscription;
 }

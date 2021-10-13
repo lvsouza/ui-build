@@ -48,8 +48,20 @@ export function observe<T>(initialValue: T): IObservable<T> {
     };
   };
 
+  const on = (fn: (val: T) => void) => {
+    fn(getValue());
+    return subscribe(fn);
+  };
+
+  const onInit = (fn: (val: T) => void) => {
+    fn(getValue());
+  };
+
   return {
+    on,
+    onInit,
     subscribe,
+    onChange: subscribe,
     id: observerId,
     get() {
       return getValue();
