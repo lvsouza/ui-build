@@ -1,8 +1,12 @@
+import { ISubscription } from "../interfaces";
 import { NativeElement } from "../types";
+
+interface IFrameActions { }
 
 interface IFrameProps extends NativeElement<HTMLIFrameElement> {
   children?: HTMLElement | HTMLElement[];
   onLoad?: () => void;
+  observables?: (ref: HTMLIFrameElement, actions: IFrameActions) => ISubscription[];
 }
 
 export function IFrame(): HTMLIFrameElement;
@@ -36,9 +40,13 @@ export function IFrame(props?: IFrameProps): HTMLIFrameElement {
 
   element.onload = load;
 
-  // Load the element reference
-  if (props?.ref) {
-    props.ref.value = element;
+  if (typeof props.observables === 'function') {
+    const subscriptions = props.observables(element, {});
+
+    element.remove = () => {
+      subscriptions.forEach(sub => sub.unsubscribe());
+      element.remove();
+    };
   }
 
   return element;

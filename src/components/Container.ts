@@ -1,47 +1,50 @@
-import { NativeElement } from "../types";
+import { ISubscription } from "../interfaces";
 
-interface ContainerProps extends NativeElement<HTMLDivElement> {
-  children?: Node | Node[];
-  onClick?: (ev: MouseEvent) => void;
+interface ContainerActions {
+  getChildren: () => HTMLCollection;
+  staticSet: (callback: () => void) => void;
+  setChildren: (children: HTMLElement[]) => void;
 }
+
+type ContainerProps = (ref: HTMLDivElement, actions: ContainerActions) => (ISubscription | void)[]
 
 export function Container(): HTMLDivElement;
 export function Container(props?: ContainerProps): HTMLDivElement;
 export function Container(props?: ContainerProps) {
+  const subscriptions: ISubscription[] = [];
+
   const element = document.createElement('div');
 
-  const load = () => {
-    if (props?.children) {
-      if (Array.isArray(props.children)) {
-        props.children.forEach(node => element.appendChild(node));
-      } else {
-        element.appendChild(props.children);
-      }
+  element.remove = () => {
+    subscriptions.forEach(sub => sub.unsubscribe());
+    element.remove();
+  };
+
+
+  if (typeof props === 'function') {
+
+    const setChildren = (newChildren: HTMLElement[]) => {
+      const currentChildrenToRemove = Array.from(element.children).slice(newChildren.length - 1);
+      currentChildrenToRemove.forEach((_, index) => element.children.item(currentChildrenToRemove.length - (index + 1)).remove());
+
+      newChildren.forEach((newChild, index) => {
+        if (element.children.length >= (index + 1)) {
+          Object.assign(element.children.item(index), newChild);
+        } else {
+          element.append(newChild);
+        }
+      });
     }
 
-    if (props?.classList) {
-      element.classList.add(...props.classList);
-    }
-
-    if (props?.style) {
-      Object.assign(element.style, props?.style);
-    }
-
-    if (props?.id) {
-      element.id = props.id;
-    }
-  }
-
-  load();
-
-  // Load the element reference
-  if (props?.ref) {
-    props.ref.value = element;
-  }
-
-  // Set on click
-  if (props?.onClick) {
-    element.onclick = props.onClick;
+    props(element, {
+      setChildren,
+      getChildren: () => element.children,
+      staticSet: (callback) => callback(),
+    })
+      .forEach((setterOrSubscription) => {
+        if (typeof setterOrSubscription !== 'object') return;
+        subscriptions.push(setterOrSubscription);
+      });
   }
 
   return element;

@@ -1,8 +1,12 @@
-import { MutableRefObject } from "../types";
+import { ISubscription } from "../interfaces";
+
+interface TextActions {
+  getText: () => string;
+  setText: (text: string) => void;
+}
 
 interface TextProps {
-  text?: string | string[];
-  ref?: MutableRefObject<Text>;
+  observables?: (ref: Text, actions: TextActions) => ISubscription[];
 }
 
 export function Text(): Text;
@@ -23,19 +27,16 @@ export function Text(props?: TextProps | string | string[]) {
     return element;
   }
 
-  if (props?.text) {
-    if (Array.isArray(props.text)) {
-      element.textContent = props.text.join();
-    } else {
-      element.textContent = props.text;
-    }
-  } else {
-    element.textContent = '';
-  }
+  if (typeof props.observables === 'function') {
+    const subscriptions = props.observables(element, {
+      getText: () => element.textContent,
+      setText: (text) => element.textContent = text,
+    });
 
-  // Load the element reference
-  if (props?.ref) {
-    props.ref.value = element;
+    element.remove = () => {
+      subscriptions.forEach(sub => sub.unsubscribe());
+      element.remove();
+    };
   }
 
   return element;

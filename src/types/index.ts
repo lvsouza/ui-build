@@ -1,4 +1,3 @@
-export * from './FuctionalComponent';
-export * from './MutableRefObject';
+export * from './FunctionalComponent';
 export * from './CSSProperties';
 export * from './NativeElement';
